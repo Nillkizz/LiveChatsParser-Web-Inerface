@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "Chat Parser",
+  "short_name": "ChPa",
+  "version": "1.0.0",
+  "description": "Parse chat messages of your online translations",
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://vk.com/*",
+        "https://ok.ru/*",
+        "https://www.youtube.com/*",
+        "https://www.facebook.com/*",
+        "https://www.instagram.com/*"
+      ],
+      "js": [
+        "main.js"
+      ]
+    }
+  ]
+}
