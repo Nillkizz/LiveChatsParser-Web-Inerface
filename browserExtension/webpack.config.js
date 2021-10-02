@@ -19,6 +19,12 @@ const config = {
     path: path.resolve(__dirname, "dist"),
     filename: '[name].js'
   },
+  resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+      '@': path.resolve('src'),
+    }
+  },
 
   plugins: [
     new WebpackExtensionManifestPlugin({
