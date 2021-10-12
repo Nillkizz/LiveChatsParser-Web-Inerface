@@ -32,6 +32,11 @@ const config = {
         base: baseManifest
       }
     }),
+    new CopyPlugin({
+      patterns: [
+        { from: "./src/inject.js", to: "./inject.js" },
+      ],
+    }),
 
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/

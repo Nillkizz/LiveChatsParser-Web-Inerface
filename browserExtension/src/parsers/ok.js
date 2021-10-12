@@ -51,7 +51,7 @@ export class Ok {
             const msg = {
               social: 'ok',
               author: node.querySelector('.o').innerText,
-              text: parseMsg(node.querySelector('.textWrap')),
+              text: parseMsg(node.querySelector('.textWrap').textContent),
               datetime: (new Date).toJSON()
             }
             if (msg.text.length > 0) this.api.sendMessage(msg)

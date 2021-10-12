@@ -14,11 +14,15 @@
         "https://ok.ru/*",
         "https://www.youtube.com/*",
         "https://www.facebook.com/*",
-        "https://www.instagram.com/*"
+        "https://www.instagram.com/*",
+        "https://www.tiktok.com/*"
       ],
       "js": [
-        "main.js"
+        "inject.js"
       ]
     }
+  ],
+  "web_accessible_resources": [
+    "main.js"
   ]
 }

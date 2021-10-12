@@ -75,7 +75,7 @@ export class Instagram {
             const msg = {
               social: 'inst',
               author: _msgNode[0].textContent,
-              text: parseMsg(_msgNode[1]),
+              text: parseMsg(_msgNode[1].textContent),
               datetime: (new Date).toJSON()
             }
             if (msg.text.length > 0) this.api.sendMessage(msg)

@@ -1,16 +1,17 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, onValue,
-  //  query, limitToLast 
-  } from "firebase/database";
+import {
+  getDatabase, ref, onValue,
+} from "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCr7EOy-QYuNHUIjdAHlADM3ia7VgsXrxE",
-  authDomain: "fir-ad107.firebaseapp.com",
-  databaseURL: "https://fir-ad107-default-rtdb.firebaseio.com",
-  projectId: "fir-ad107",
-  storageBucket: "fir-ad107.appspot.com",
-  messagingSenderId: "634142779348",
-  appId: "1:634142779348:web:c67e5a546412e326a51841",
+  apiKey: "AIzaSyCVMhTtTJ9dtEIPLFeVQqRGCMhI_lIuofw",
+  authDomain: "allcomments-shkolamm.firebaseapp.com",
+  databaseURL: "https://allcomments-shkolamm-default-rtdb.firebaseio.com",
+  projectId: "allcomments-shkolamm",
+  storageBucket: "allcomments-shkolamm.appspot.com",
+  messagingSenderId: "143721825135",
+  appId: "1:143721825135:web:58fbd9427a94a9c4f41e9a",
+  measurementId: "G-1QRTNDH3YT"
 };
 
 initializeApp(firebaseConfig);

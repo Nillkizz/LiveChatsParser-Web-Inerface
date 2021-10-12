@@ -1,17 +1,21 @@
 <template lang="pug">
 .chat
   message(
-    v-for="(msg, id) in messages" 
-    :id="id" 
-    :social="msg.social"
-    :author="msg.author"
-    :text="msg.text" 
-    :datetime="msg.datetime"
-    @mounted="toBottom(0)")
+    v-for="(msg, id) in messages",
+    :id="id",
+    :social="msg.social",
+    :author="msg.author",
+    :text="msg.text",
+    :datetime="msg.datetime",
+    @mounted="toBottom(0)"
+  )
   #chat-bottom
 .overlayControls
   button(@click="toBottom") ↓↓↓
-  button(@click="autoScroll = !autoScroll" :class="{'line-through': !autoScroll}") AutoScroll
+  button(
+    @click="autoScroll = !autoScroll",
+    :class="{ 'line-through': !autoScroll }"
+  ) AutoScroll
 </template>
 
 <script>
@@ -25,7 +29,6 @@ export default {
   },
   data() {
     return {
-      initialized: false,
       autoScroll: window.location.hash.length === 0,
       messages: [],
     };
@@ -36,10 +39,9 @@ export default {
   methods: {
     updateMessages(messages) {
       this.messages = messages;
-      this.initialized = true;
     },
     toBottom(strength) {
-      if (strength < 1 && !this.autoScroll) return
+      if (strength < 1 && !this.autoScroll) return;
       document.getElementById("chat-bottom").scrollIntoView();
     },
   },

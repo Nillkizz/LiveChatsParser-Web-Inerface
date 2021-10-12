@@ -5,8 +5,8 @@
       //- button.id(@click="copyId") \#{{ id }} 
       span {{ formatedDateTime }}
     .author
-      img.socialIcon(:src="socialIcon")
-      span.name {{ author }}
+      img.socialIcon(:src="socialIcon.url", :alt="socialIcon.alt")
+      span.name {{ author }} {{ socialIcon.alt }}
   .body
     .text {{ text }}
 </template>
@@ -30,6 +30,9 @@ const socials = {
   inst: {
     icon: require("@/assets/images/inst.png"),
   },
+  tt: {
+    icon: require("@/assets/images/tt.png"),
+  },
 };
 export default {
   name: "message",
@@ -40,8 +43,8 @@ export default {
     text: String,
     datetime: String,
   },
-  mounted(){
-    this.$emit('mounted')
+  mounted() {
+    this.$emit("mounted");
   },
   computed: {
     formatedDateTime() {
@@ -49,7 +52,7 @@ export default {
       return dt.toLocaleString(DateTime.TIME_24_WITH_SECONDS);
     },
     socialIcon() {
-      return socials[this.social].icon;
+      return { url: socials[this.social]?.icon, alt: this.social };
     },
   },
   methods: {
@@ -57,7 +60,7 @@ export default {
     //   navigator.clipboard.writeText(this.id);
     //   alert("Скопирован id сообщения: " + this.id);
     // }
-  }
+  },
 };
 </script>
 

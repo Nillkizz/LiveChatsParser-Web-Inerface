@@ -75,7 +75,7 @@ export class Youtube {
             const msg = {
               social: 'yt',
               author: node.querySelector('yt-live-chat-author-chip').innerText,
-              text: parseMsg(node.querySelector('#message')),
+              text: parseMsg(node.querySelector('#message').textContent),
               datetime: (new Date).toJSON()
             }
             if (msg.text.length > 0) this.api.sendMessage(msg)

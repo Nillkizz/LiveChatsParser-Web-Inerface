@@ -1,4 +1,4 @@
-import { FaceBook, Instagram, Vk, Ok, Youtube } from './parsers'
+import { FaceBook, Instagram, Vk, Ok, Youtube, TikTok } from './parsers'
 import { addStylesheet } from './helpers';
 
 class Controls {
@@ -10,6 +10,7 @@ class Controls {
       'www.youtube.com': Youtube,
       'www.facebook.com': FaceBook,
       'www.instagram.com': Instagram,
+      'www.tiktok.com': TikTok,
     }
   }
   init(href = window.location.href) {
@@ -43,8 +44,10 @@ class Controls {
     if (this.rendered && !this.parser.disabled) document.querySelector('.pcontrols').remove()
   }
 }
-let controls = new Controls()
-controls.init()
+window.addEventListener('load', () => {
+  let controls = new Controls()
+  controls.init()
+})
 
 watchLocation()
 function watchLocation() {
@@ -56,7 +59,3 @@ function watchLocation() {
     },
   });
 }
-
-
-
-

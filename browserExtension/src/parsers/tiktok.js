@@ -1,7 +1,7 @@
 import { API } from '@/api';
 import { addStylesheet, parseMsg } from '@/helpers';
 
-export class Vk {
+export class TikTok {
   constructor() {
     this.config = { childList: true, subtree: true }
     this.observer = new MutationObserver(this._cb.bind(this))
@@ -17,55 +17,53 @@ export class Vk {
                         position: fixed;
                         bottom: 1rem;
                         left: 1rem;
-                        padding: .5rem;
+                        padding: .8rem;
                         background-color: #000A;
                         color: white;
                         border-radius: .3rem;
                         min-width: 200px;
                         text-align: center;
-                        z-index: 1000;`,
+                        z-index: 10000;`,
         '.pcontrols__title': `
                         margin-bottom: .7rem;`,
-        '.pcontrols__vk-start.flat_button[disabled]': `
+        '.pcontrols__buttons': `
+                        display: flex; 
+                        flex-direction: column;
+                        justify-content: center;`,
+        '.pcontrols__tt-start[disabled]': `
                         pointer-events: none;
                         background: var(--light_blue_300);`
       },
-      title: 'Парсер чата для VK',
+      title: 'Парсер чата для TikTok',
       inputs: [],
       buttons: {
         start: {
           inner: { start: 'Запустить', started: 'Запущен' },
-          class: 'pcontrols__vk-start flat_button',
-          selector: '.pcontrols__vk-start',
+          class: 'pcontrols__tt-start tiktok-btn-pc tiktok-btn-pc-medium tiktok-btn-pc-primary',
+          selector: '.pcontrols__tt-start',
           cb: this.start.bind(this),
         }
       }
     }
     this.api = new API()
   }
-  _cb(mutations, observer) {
-    mutations.forEach(m => {
-      if (m.type == 'childList') {
-        m.addedNodes.forEach(node => {
-          if (node.classList.contains('mv_chat_message')) {
-            const msg = {
-              social: 'vk',
-              author: node.querySelector('.mv_chat_message_author_name').innerText,
-              text: parseMsg(node.querySelector('.mv_chat_message_text').textContent),
-              datetime: (new Date).toJSON()
-            }
-            if (msg.text.length > 0) this.api.sendMessage(msg)
-          }
-        })
+  _cb(e) {
+    if (e.method == 'WebcastChatMessage') {
+      const msg = {
+        social: 'tt',
+        author: e.payload.user.nickname,
+        text: (e.payload.content),
+        datetime: (new Date).toJSON()
       }
-    })
+      if (msg.text.length > 0) this.api.sendMessage(msg)
+    }
   }
   start() {
-    this.node = document.querySelector('.mv_chat_messages_wrap')
-    this.observer.observe(this.node, this.config);
     const btn = document.querySelector(this.controls.buttons.start.selector)
+
+    window.__RoomMessage.watchAllEvents.push(this._cb.bind(this))
     btn.disabled = true
     btn.innerText = this.controls.buttons.start.inner.started
-    addStylesheet('.mv_chat_messages_wrap{border: .2rem dashed red;}')
+    addStylesheet('.webcast-chatroom-messages-list{border: .25rem dashed red;}')
   }
 }
