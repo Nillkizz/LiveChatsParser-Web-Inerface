@@ -2,7 +2,6 @@
 .chat
   message(
     v-for="(msg, id) in messages",
-    :id="id",
     :social="msg.social",
     :author="msg.author",
     :text="msg.text",
@@ -20,7 +19,7 @@
 
 <script>
 import message from "./components/message.vue";
-import { subscribeToMessages } from "@/firebase";
+import { subscribeToMessages, updateMessages } from "@/firebase";
 
 export default {
   name: "App",
@@ -38,6 +37,7 @@ export default {
   },
   methods: {
     updateMessages(messages) {
+      if (!window.filtered) messages = updateMessages(messages);
       this.messages = messages;
     },
     toBottom(strength) {
