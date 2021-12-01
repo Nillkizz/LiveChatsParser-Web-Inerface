@@ -49,13 +49,13 @@ window.addEventListener('load', () => {
   controls.init()
 })
 
-watchLocation()
-function watchLocation() {
-  window.history.pushState = new Proxy(window.history.pushState, {
-    apply: (target, thisArg, argArray) => {
-      controls.destroy()
-      controls.init(argArray[2])
-      return target.apply(thisArg, argArray);
-    },
-  });
-}
+// watchLocation()
+// function watchLocation() {
+//   window.history.pushState = new Proxy(window.history.pushState, {
+//     apply: (target, thisArg, argArray) => {
+//       controls.destroy()
+//       controls.init(argArray[2])
+//       return target.apply(thisArg, argArray);
+//     },
+//   });
+// }

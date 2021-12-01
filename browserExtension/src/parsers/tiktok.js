@@ -1,4 +1,3 @@
-import { API } from '@/api';
 import { addStylesheet, parseMsg } from '@/helpers';
 
 export class TikTok {
@@ -45,7 +44,6 @@ export class TikTok {
         }
       }
     }
-    this.api = new API()
   }
   _cb(e) {
     if (e.method == 'WebcastChatMessage') {
@@ -55,7 +53,7 @@ export class TikTok {
         text: (e.payload.content),
         datetime: (new Date).toJSON()
       }
-      if (msg.text.length > 0) this.api.sendMessage(msg)
+      if (msg.text.length > 0) document.dispatchEvent(new CustomEvent('nillkizz_parser_message', { detail: { msg } }))
     }
   }
   start() {

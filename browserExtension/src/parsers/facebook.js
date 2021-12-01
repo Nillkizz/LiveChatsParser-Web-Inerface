@@ -1,14 +1,7 @@
-import { API } from '@/api';
 import { addStylesheet } from '@/helpers';
 
 export class FaceBook {
   constructor(href) {
-    this.pathMatch = href.match(/\/videos\/(\d+)/) ?? href.match(/\/watch\/live\/\?v=(\d+)/);
-    if (this.pathMatch == null) {
-      this.disabled = true
-      return
-    }
-
     this.controls = {
       init() {
         Object.values(this.buttons).forEach(button => {
@@ -46,7 +39,6 @@ export class FaceBook {
         }
       }
     }
-    this.api = new API()
   }
   getUrl(token) {
     // const token = 'EAANd50iL9ZCkBAPnMWMvp2jXqDNcUyMlbEohIrAiDn52hbYuuiepxcLtFmowVREmyn3O7DiHsIEKZCBAxTn7i5FsEmA6EM76xB0ZB9i95P5W4R2ZAvZAvj2mQPRHxiRuXNQuCmw1KTLKIFazKX74g4IRlMo6ocP79obiSTg0NiDVwsQ9YI5UkNZCzs0rVGpv4ZD'
@@ -64,7 +56,7 @@ export class FaceBook {
       text: data.message,
       datetime: (new Date).toJSON()
     }
-    this.api.sendMessage(msg)
+    document.dispatchEvent(new CustomEvent('nillkizz_parser_message', { detail: { msg } }))
   }
   start() {
     const token = document.querySelector('.pcontrols__inputs input').value

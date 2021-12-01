@@ -1,4 +1,3 @@
-import { API } from '@/api';
 import { addStylesheet, parseMsg } from '@/helpers';
 
 export class Youtube {
@@ -65,7 +64,6 @@ export class Youtube {
         }
       }
     }
-    this.api = new API()
   }
   _cb(mutations, observer) {
     mutations.forEach(m => {
@@ -78,7 +76,7 @@ export class Youtube {
               text: parseMsg(node.querySelector('#message').textContent),
               datetime: (new Date).toJSON()
             }
-            if (msg.text.length > 0) this.api.sendMessage(msg)
+            if (msg.text.length > 0) document.dispatchEvent(new CustomEvent('nillkizz_parser_message', { detail: { msg } }))
           }
         })
       }

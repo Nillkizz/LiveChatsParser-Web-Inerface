@@ -1,4 +1,3 @@
-import { API } from '@/api';
 import { addStylesheet, parseMsg } from '@/helpers';
 
 export class Ok {
@@ -41,7 +40,6 @@ export class Ok {
         }
       }
     }
-    this.api = new API()
   }
   _cb(mutations, observer) {
     mutations.forEach(m => {
@@ -54,7 +52,7 @@ export class Ok {
               text: parseMsg(node.querySelector('.textWrap').textContent),
               datetime: (new Date).toJSON()
             }
-            if (msg.text.length > 0) this.api.sendMessage(msg)
+            if (msg.text.length > 0) document.dispatchEvent(new CustomEvent('nillkizz_parser_message', { detail: { msg } }))
           }
         })
       }

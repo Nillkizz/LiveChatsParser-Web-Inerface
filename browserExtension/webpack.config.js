@@ -2,6 +2,7 @@
 
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
+const webpack = require('webpack');
 const baseManifest = require("./browser/manifest.json");
 const WebpackExtensionManifestPlugin = require("webpack-extension-manifest-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -13,7 +14,10 @@ const stylesHandler = isProduction
   : "style-loader";
 
 const config = {
-  entry: "./src/index.js",
+  entry: {
+    main: "./src/index.js",
+    inject: "./src/inject.js"
+  },
   devtool: "cheap-module-source-map",
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -25,21 +29,12 @@ const config = {
       '@': path.resolve('src'),
     }
   },
-
   plugins: [
     new WebpackExtensionManifestPlugin({
       config: {
         base: baseManifest
       }
     }),
-    new CopyPlugin({
-      patterns: [
-        { from: "./src/inject.js", to: "./inject.js" },
-      ],
-    }),
-
-    // Add your plugins here
-    // Learn more about plugins from https://webpack.js.org/configuration/plugins/
   ],
   module: {
     rules: [

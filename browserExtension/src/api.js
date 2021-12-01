@@ -36,8 +36,7 @@ export class API {
     let has = false;
     this.stopWords.forEach(word => {
       if (typeof word !== "string" || word.length == 0) return
-      has = has || msg.text.includes(word)
-      if (has) return has;
+      has = has || msg.text.toLowerCase().includes(word.toLowerCase())
     })
     return has;
   }

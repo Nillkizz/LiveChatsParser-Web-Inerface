@@ -1,4 +1,3 @@
-import { API } from '@/api';
 import { addStylesheet, parseMsg } from '@/helpers';
 
 export class Vk {
@@ -30,18 +29,17 @@ export class Vk {
                         pointer-events: none;
                         background: var(--light_blue_300);`
       },
-      title: 'Парсер чата для VK',
+      title: 'Parser VK',
       inputs: [],
       buttons: {
         start: {
-          inner: { start: 'Запустить', started: 'Запущен' },
+          inner: { start: 'Start', started: 'Has been started' },
           class: 'pcontrols__vk-start flat_button',
           selector: '.pcontrols__vk-start',
           cb: this.start.bind(this),
         }
       }
     }
-    this.api = new API()
   }
   _cb(mutations, observer) {
     mutations.forEach(m => {
@@ -54,7 +52,7 @@ export class Vk {
               text: parseMsg(node.querySelector('.mv_chat_message_text').textContent),
               datetime: (new Date).toJSON()
             }
-            if (msg.text.length > 0) this.api.sendMessage(msg)
+            if (msg.text.length > 0) document.dispatchEvent(new CustomEvent('nillkizz_parser_message', { detail: { msg } }))
           }
         })
       }

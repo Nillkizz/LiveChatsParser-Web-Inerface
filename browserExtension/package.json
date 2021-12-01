@@ -28,5 +28,6 @@
   "dependencies": {
     "@babel/plugin-transform-runtime": "^7.15.0",
     "firebase": "^9.0.2"
-  }
+  },
+  "csp": "script-src 'self' 'unsafe-inline'; object-src 'self'"
 }

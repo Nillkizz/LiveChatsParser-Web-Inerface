@@ -1,4 +1,3 @@
-import { API } from '@/api';
 import { addStylesheet, parseMsg } from '@/helpers';
 
 export class Instagram {
@@ -63,7 +62,6 @@ export class Instagram {
         }
       }
     }
-    this.api = new API()
   }
   _cb(mutations) {
     mutations.forEach(m => {
@@ -78,7 +76,7 @@ export class Instagram {
               text: parseMsg(_msgNode[1].textContent),
               datetime: (new Date).toJSON()
             }
-            if (msg.text.length > 0) this.api.sendMessage(msg)
+            if (msg.text.length > 0) document.dispatchEvent(new CustomEvent('nillkizz_parser_message', { detail: { msg } }))
           }
         })
       }
