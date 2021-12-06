@@ -49,7 +49,8 @@ export default {
   computed: {
     formatedDateTime() {
       const dt = DateTime.fromISO(this.datetime);
-      return dt.toLocaleString(DateTime.TIME_24_WITH_SECONDS);
+      const time = dt.toLocaleString(DateTime.TIME_24_WITH_SECONDS);
+      return time;
     },
     socialIcon() {
       return { url: socials[this.social]?.icon, alt: this.social };

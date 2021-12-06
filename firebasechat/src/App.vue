@@ -34,6 +34,8 @@ export default {
   },
   mounted() {
     subscribeToMessages(this.updateMessages);
+    const version = "1.0.0";
+    console.info(`v${version} FireBase chat parser interface`);
   },
   methods: {
     updateMessages(messages) {
